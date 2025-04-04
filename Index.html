@@ -8,14 +8,20 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 20%;
+      margin: 0;
+      padding: 0;
       background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
     }
     h1 {
       font-size: 2rem;
+      margin-bottom: 1rem;
     }
     #countdown {
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: #0077cc;
     }
   </style>
@@ -26,16 +32,27 @@
 
   <script>
     function updateCountdown() {
-      const today = new Date();
-      const targetDate = new Date("2025-06-08");
-      targetDate.setHours(0, 0, 0, 0);
-      const timeDiff = targetDate - today;
-      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").textContent = daysLeft + " dní";
+      const now = new Date();
+      const targetDate = new Date("2025-06-08T00:00:00");
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "0 dní 0 hodin 0 minut 0 sekund";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById("countdown").textContent =
+        `${days} dní ${hours} hodin ${minutes} minut ${seconds} sekund`;
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000 * 60 * 60); // aktualizace každou hodinu
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
