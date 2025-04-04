@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odpočet do 8. 6. 2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 20%;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    #countdown {
+      font-size: 3rem;
+      color: #0077cc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Dní do 8. června 2025:</h1>
+  <div id="countdown"></div>
+
+  <script>
+    function updateCountdown() {
+      const today = new Date();
+      const targetDate = new Date("2025-06-08");
+      targetDate.setHours(0, 0, 0, 0);
+      const timeDiff = targetDate - today;
+      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown").textContent = daysLeft + " dní";
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000 * 60 * 60); // aktualizace každou hodinu
+  </script>
+</body>
+</html>
